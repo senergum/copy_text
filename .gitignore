@@ -1,0 +1,6 @@
+.venv
+__pycache__
+bin
+start.bat — ярлык.lnk
+text_capture.txt
+ipravlenie.txt
