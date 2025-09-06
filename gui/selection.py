@@ -16,29 +16,36 @@ def get_selection(monitors):
     rect = None
     coords = None
     selection_cancelled = False
-    def close_window():
+
+    def close_window(event=None):
         nonlocal selection_cancelled
         selection_cancelled = True
         root.quit()
+
     def on_press(event):
         nonlocal start_x, start_y, rect
         start_x, start_y = event.x, event.y
         rect = canvas.create_rectangle(start_x, start_y, start_x, start_y, outline='red', width=3, fill='blue', stipple='gray50')
+
     def on_drag(event):
         if rect:
             canvas.coords(rect, start_x, start_y, event.x, event.y)
+
     def on_release(event):
         nonlocal coords
         if rect:
             x1, y1, x2, y2 = canvas.coords(rect)
             coords = (int(min(x1, x2)), int(min(y1, y2)), int(max(x1, x2)), int(max(y1, y2)))
         root.quit()
+
     canvas.bind('<Button-1>', on_press)
     canvas.bind('<B1-Motion>', on_drag)
     canvas.bind('<ButtonRelease-1>', on_release)
-    root.bind('<Escape>', lambda event: close_window())
-    esc_hook = keyboard.add_hotkey('esc', close_window)
+    root.bind('<Escape>', close_window)
+
+    esc_hook = keyboard.add_hotkey('esc', close_window, suppress=True)  
     root.mainloop()
+
     keyboard.remove_hotkey(esc_hook)
     root.destroy()
     return None if selection_cancelled else coords

@@ -33,8 +33,8 @@ class TextCapturePro:
         if hasattr(ctypes, 'windll'):
             ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
         self.tray_icon = create_tray_icon(self.on_hotkey_pressed, self.exit_app)
-        keyboard.add_hotkey(self.hotkey, self.on_hotkey_pressed)
-        keyboard.add_hotkey('ctrl+alt+q', self.exit_app)
+        keyboard.add_hotkey(self.hotkey, self.on_hotkey_pressed, suppress=True)
+        keyboard.add_hotkey('ctrl+alt+f10', self.exit_app, suppress=True)
         while self.is_active:
             time.sleep(0.1)
 
