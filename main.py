@@ -11,7 +11,7 @@ import ctypes
 class TextCapturePro:
     def __init__(self):
         self.is_active = True
-        self.hotkey = 'ctrl+alt+c'
+        self.hotkey = 'alt+c'
         self.monitors = get_all_monitors()
         self.tray_icon = None
 

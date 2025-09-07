@@ -11,7 +11,7 @@ def create_tray_icon(capture_callback, exit_callback):
     else:
         image = PILImage.new('RGB', (64, 64), 'blue')
     menu = (
-        item('Захватить текст (Ctrl+Alt+C)', capture_callback),
+        item('Захватить текст (Alt+C)', capture_callback),
         item('Выход', exit_callback)
     )
     tray_icon = pystray.Icon('text_capture', image, 'Text Capture Pro', menu)
